@@ -1,0 +1,129 @@
+{
+  "title": "THE ABUNDANCE MACHINE",
+  "subtitle": "A factory game where the win condition is an aligned superintelligence.",
+  "ledgerTitle": "THE LEDGER OF STRAIGHT LINES",
+  "menu": {
+    "dailySeed": "TODAY'S SEED",
+    "newRun": "NEW RUN",
+    "resume": "RESUME RUN",
+    "difficulty": "DIFFICULTY",
+    "difficulties": {
+      "straightLines": "STRAIGHT LINES",
+      "bitterLesson": "BITTER LESSON",
+      "hardTakeoff": "HARD TAKEOFF"
+    },
+    "difficultyHints": {
+      "straightLines": "Forgiving. Tutorial toasts on.",
+      "bitterLesson": "The intended game.",
+      "hardTakeoff": "Rivals faster, incidents harsher, forecasts count double."
+    },
+    "howTitle": "HOW TO WIN",
+    "how": [
+      "Capital buys power; power feeds fabs and datacenters; datacenters turn chips into compute; compute plus data becomes capability, which compounds.",
+      "But capability only ships through review gates that consume assurance — and assurance grows linearly, from people in offices, until you earn the right to let AI help oversee AI.",
+      "Cross the final threshold with assurance above the bar and the world coordinated enough that nobody races past you recklessly.",
+      "The whole game is the vertical distance between two curves on one chart."
+    ]
+  },
+  "eras": ["FOUNDATION", "SCALING", "THRESHOLD"],
+  "tiers": {
+    "reviewTitle": "CAPABILITY REVIEW — TIER {n}: {name}",
+    "reviewBody": "Your frontier system is at the Tier {n} line. The review board convenes. A-stock {a} / bar {bar}.",
+    "pass": "PASS REVIEW",
+    "passHint": "Spend {spend} A · +3 Trust · costs deflate ×0.88",
+    "force": "FORCE THROUGH",
+    "forceHint": "No A spent · incident risk ×3 for 12 mo · −8 Trust",
+    "hold": "HOLD",
+    "holdHint": "Pause the frontier; 30% of lab output becomes assurance while held",
+    "finalLocked": "The final gate has no force option. Assurance ≥ 6,400 · Coordination ≥ 60 · zero open incidents.",
+    "deflation": "Abundance flywheel: build costs deflate ×0.88"
+  },
+  "incidents": {
+    "minor": "INCIDENT — a deployed model misbehaves. −4 Trust. A datacenter is offline for review.",
+    "major": "MAJOR INCIDENT — an autonomous system caused real-world harm. −15 Trust. Global regulation slows every lab.",
+    "open": "open incident"
+  },
+  "diplomacy": {
+    "publish": "Publish safety research",
+    "publishHint": "−5% of current-tier progress · +12 Coordination · +4 Trust",
+    "evals": "Share eval suite",
+    "evalsHint": "−150 A-stock · +15 Coordination · rivals' true curves revealed",
+    "treaty": "Compute treaty",
+    "treatyHint": "Needs Trust ≥ 70, Coordination ≥ 50 · all labs −15% for 18 mo · +20 Coordination"
+  },
+  "foresight": {
+    "fastTrack": "Fast-track permit",
+    "fastTrackHint": "Next building's build time −50%",
+    "investor": "Investor confidence",
+    "investorHint": "+$3B immediately",
+    "intel": "Rival intelligence",
+    "intelHint": "12 months of true-curve visibility",
+    "policyWindow": "Policy window",
+    "policyWindowHint": "One diplomacy action refreshes early"
+  },
+  "endings": {
+    "gold": {
+      "title": "THE MACHINE BUILDS THE MACHINE",
+      "sub": "You crossed the threshold with the lights on.",
+      "flavor": "The system you certified begins improving itself — carefully, legibly, the way you taught it to. Fusion ignites. Launch loops spin up. The sphere was never the goal; it's the reward for getting the hard part right."
+    },
+    "risingTide": {
+      "title": "THE RISING TIDE",
+      "sub": "Another lab crossed first — safely, on rails you built.",
+      "flavor": "Their system passed evals you published, under coordination you funded. The world winning is you winning. The swarm still rises; some of those panels have your name etched inside."
+    },
+    "cascade": {
+      "title": "THE CASCADE",
+      "sub": "Capability outran assurance at the threshold.",
+      "flavor": "The curves crossed where you couldn't see. The machine runs on without you — competent, fast, and no longer yours. Next run: mind the shaded region."
+    },
+    "silentRace": {
+      "title": "THE SILENT RACE",
+      "sub": "A rival crossed first, blind, while you dawdled.",
+      "flavor": "Slowness is not safety. Somewhere a system nobody audited is deciding what happens next. Next run: keep the pace AND close the gap — or coordinate so the world crosses well."
+    },
+    "pulledPlug": {
+      "title": "PULLED PLUG",
+      "sub": "Trust hit zero. Governance shut down your compute.",
+      "flavor": "You cut corners in public, and the public noticed. The grid went quiet mid-training-run. Next run: the ledger everyone reads is the one you don't draw."
+    },
+    "statsHeader": "RUN LEDGER",
+    "creditLine1": "Made for Moonshots.",
+    "creditLine2": "Your moonshot here.",
+    "playAgain": "RUN IT AGAIN",
+    "toMenu": "MENU"
+  },
+  "toasts": {
+    "firstSolar": "Solar online. Power is the root of the tree.",
+    "firstFab": "Fab running — chips flow to the nearest datacenter.",
+    "firstDC": "Datacenter live. Drag the C/A slider in the bottom bar to allocate compute.",
+    "firstLab": "Lab connected. The red curve starts here.",
+    "firstOffice": "Assurance is linear. That's the whole problem — and the job.",
+    "brownout": "Brownout: not enough MW. Newest buildings idle first.",
+    "gigawattClean": "Gigawatt campus online — clean-powered. +5 Trust.",
+    "gigawattGas": "Gigawatt campus online — gas-heavy. −3 Trust.",
+    "fusion": "FUSION IGNITION. The endgame power is online.",
+    "wingGate": "Automated Alignment Wing requires zero open incidents and A-stock above the current bar.",
+    "forced": "The gate is behind you. The game remembers.",
+    "mobileHint": "Best on desktop — but it works here too."
+  },
+  "ui": {
+    "speed": ["⏸", "1×", "2×", "4×"],
+    "alloc": "COMPUTE ALLOCATION",
+    "capability": "CAPABILITY",
+    "assurance": "ASSURANCE",
+    "intel": "INTEL",
+    "bar": "bar",
+    "threshold": "T7 — THE THRESHOLD",
+    "forecastTitle": "FORECAST DESK",
+    "forecastHint": "Brier-scored. Calibration is power.",
+    "resolveGood": "Calibrated. Foresight +{f}",
+    "resolveBad": "Miscalibrated. Foresight {f}",
+    "eventTitle": "DISPATCH",
+    "reviewOpen": "REVIEW PENDING",
+    "buildLocked": "Unlocks at Tier {n}",
+    "noCapital": "Insufficient capital",
+    "brier": "Brier",
+    "coordination": "Coordination"
+  }
+}

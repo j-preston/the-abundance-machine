@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Abundance Machine</title>
+  <meta name="description" content="A factory-strategy outro game where the win condition is an aligned superintelligence — and the Dyson swarm is the credits sequence.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='%23F2B705'/></svg>">
+</head>
+<body>
+  <div id="app">
+    <!-- The Ledger of Straight Lines -->
+    <header id="ledger-row">
+      <div id="ledger-title-block">
+        <div id="ledger-title">THE LEDGER OF STRAIGHT LINES</div>
+        <div id="era-label">FOUNDATION</div>
+      </div>
+      <canvas id="ledger-canvas"></canvas>
+      <div id="clock-block">
+        <div id="date-display">Jan 2027</div>
+        <div id="speed-controls">
+          <button data-speed="0" title="Pause (Space)">⏸</button>
+          <button data-speed="1" class="active">1×</button>
+          <button data-speed="2">2×</button>
+          <button data-speed="4">4×</button>
+        </div>
+        <button id="mute-btn" title="Mute" aria-label="Mute audio">♪</button>
+      </div>
+    </header>
+
+    <!-- Build palette | Grid | Context -->
+    <main id="main-row">
+      <nav id="build-palette" aria-label="Build palette"></nav>
+      <div id="grid-wrap">
+        <canvas id="grid-canvas"></canvas>
+        <div id="toast-stack"></div>
+      </div>
+      <aside id="context-panel"></aside>
+    </main>
+
+    <!-- Resource bar -->
+    <footer id="resource-bar"></footer>
+
+    <!-- Menu / endings overlay -->
+    <div id="overlay" class="visible">
+      <canvas id="overlay-canvas"></canvas>
+      <div id="overlay-ui"></div>
+    </div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

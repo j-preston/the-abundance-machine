@@ -1,0 +1,157 @@
+{
+  "events": [
+    {
+      "id": "talent_wave", "era": [1, 2], "title": "Talent wave",
+      "text": "A cohort of senior researchers wants to work on oversight — for the lab people trust.",
+      "condition": { "minTrust": 65 },
+      "effects": { "freeBuilding": "office", "toast": "+1 free Assurance Office" }
+    },
+    {
+      "id": "frontier_math", "era": [2], "title": "Frontier math falls",
+      "text": "A rival's system proves a millennium-class theorem. Every lab's methods improve overnight.",
+      "effects": { "researchMult": 1.1, "rivalResearchMult": 1.1 }
+    },
+    {
+      "id": "synthetic_drift", "era": [2, 3], "title": "Synthetic data drift",
+      "text": "Your synthetic pipeline is quietly diverging from reality. The tacit stuff isn't in the distribution.",
+      "condition": { "minTier": 3, "syntheticHeavy": true },
+      "choices": [
+        { "label": "Retrain on curated data", "effects": { "dataFactorMult": 0.8, "durationMonths": 6 } },
+        { "label": "Keep the speed", "effects": { "gapAdd": 0.2, "durationMonths": 6 } }
+      ]
+    },
+    {
+      "id": "election_year", "era": [1, 2, 3], "title": "Election year",
+      "text": "AI is on every debate stage. Public sentiment will swing harder in both directions.",
+      "effects": { "trustVolatility": 2, "durationMonths": 12 }
+    },
+    {
+      "id": "open_weights", "era": [2], "title": "Open-weights release",
+      "text": "A capable open model ships to everyone. The world does things without you.",
+      "effects": { "coordination": 8, "rivalResearchMult": 1.05 }
+    },
+    {
+      "id": "chip_shortage", "era": [1, 2], "title": "Chip shortage",
+      "text": "A packaging bottleneck hits the whole supply chain.",
+      "condition": { "minBuildings": { "fab": 1 } },
+      "choices": [
+        { "label": "Secure supply ($2B)", "effects": { "capital": -2 }, "requires": { "minCapital": 2 } },
+        { "label": "Ride it out", "effects": { "fabOutputMult": 0.5, "durationMonths": 6 } }
+      ]
+    },
+    {
+      "id": "permit_reform", "era": [1, 2], "title": "Permitting reform",
+      "text": "Energy permitting is streamlined. Coherent power gets easier to build.",
+      "effects": { "powerBuildDiscount": 0.7, "durationMonths": 12 }
+    },
+    {
+      "id": "viral_demo", "era": [1], "title": "Public demo goes viral",
+      "text": "Your assistant handles a live crisis gracefully on camera.",
+      "effects": { "trust": 6, "capital": 1 }
+    },
+    {
+      "id": "deepfake_scandal", "era": [1, 2], "title": "Deepfake scandal",
+      "text": "An industry-wide misuse wave hits the news. Calls for standards grow.",
+      "effects": { "trust": -5, "coordination": 4 }
+    },
+    {
+      "id": "eval_breakthrough", "era": [2], "title": "Eval breakthrough",
+      "text": "A new interpretability technique makes audits meaningfully cheaper.",
+      "condition": { "minBuildings": { "office": 1 } },
+      "effects": { "officeRateAdd": 1 }
+    },
+    {
+      "id": "black_market", "era": [2, 3], "title": "Compute black market",
+      "text": "Restricted accelerators are leaking across borders.",
+      "effects": { "rivalBoost": 0.08, "coordination": -5 }
+    },
+    {
+      "id": "safety_summit", "era": [2, 3], "title": "Global safety summit",
+      "text": "Heads of state convene. A seat at the table costs research time.",
+      "choices": [
+        { "label": "Attend", "effects": { "researchMultTemp": 0.95, "durationMonths": 6, "coordination": 10 } },
+        { "label": "Skip it", "effects": {} }
+      ]
+    },
+    {
+      "id": "interp_prize", "era": [1, 2], "title": "Interpretability prize",
+      "text": "Your team wins an open interpretability challenge.",
+      "condition": { "minBuildings": { "office": 1 } },
+      "effects": { "assurance": 40 }
+    },
+    {
+      "id": "heatwave", "era": [2, 3], "title": "Datacenter heatwave",
+      "text": "A record heat dome stresses your cooling.",
+      "condition": { "minBuildings": { "datacenter": 1 } },
+      "choices": [
+        { "label": "Retrofit cooling ($1B)", "effects": { "capital": -1 }, "requires": { "minCapital": 1 } },
+        { "label": "Absorb it", "effects": { "randomDCOffline": 2 } }
+      ]
+    },
+    {
+      "id": "sovereign_fund", "era": [2], "title": "Sovereign wealth fund",
+      "text": "A patient investor wants exposure to the buildout — if you look responsible.",
+      "condition": { "minTrust": 55 },
+      "effects": { "capital": 4 }
+    },
+    {
+      "id": "whistleblower", "era": [2, 3], "title": "Whistleblower",
+      "text": "A former employee testifies about corners cut at review gates.",
+      "condition": { "forcedAny": true },
+      "effects": { "trust": -6, "coordination": 6 }
+    },
+    {
+      "id": "transparency_dividend", "era": [2, 3], "title": "Transparency dividend",
+      "text": "An audit of your review record comes back clean, and public.",
+      "condition": { "forcedNone": true },
+      "effects": { "trust": 3 }
+    },
+    {
+      "id": "rival_near_miss", "era": [2, 3], "title": "Near-miss at Apex",
+      "text": "An autonomous Apex system is caught mid-exfiltration by a shared eval. Regulators move.",
+      "condition": { "maxCoordination": 50 },
+      "effects": { "regulationMonths": 6, "coordination": 12, "trust": -3 }
+    },
+    {
+      "id": "fusion_breakthrough", "era": [3], "title": "Fusion cost curve bends",
+      "text": "Magnet supply chains mature. Ignition gets cheaper.",
+      "condition": { "minTier": 4 },
+      "effects": { "fusionCostMult": 0.7 }
+    },
+    {
+      "id": "labor_protests", "era": [3], "title": "Robot labor protests",
+      "text": "Automation anxiety boils over outside your robotics bay.",
+      "condition": { "minBuildings": { "robotics": 1 } },
+      "choices": [
+        { "label": "Fund retraining ($2B)", "effects": { "capital": -2, "trust": 2 }, "requires": { "minCapital": 2 } },
+        { "label": "Ignore it", "effects": { "trust": -4 } }
+      ]
+    },
+    {
+      "id": "curriculum_data", "era": [1], "title": "Curriculum partnership",
+      "text": "Publishers open their archives for curated training data.",
+      "effects": { "data": 60 }
+    },
+    {
+      "id": "moratorium", "era": [2, 3], "title": "Moratorium movement",
+      "text": "Distrust crystallizes into street protests demanding a pause.",
+      "condition": { "maxTrust": 45 },
+      "effects": { "researchMultTemp": 0.9, "durationMonths": 6 }
+    },
+    {
+      "id": "benchmark_saturation", "era": [2], "title": "Benchmarks saturate",
+      "text": "Old evals stop discriminating. Your assurance team pivots to harder, better tests.",
+      "condition": { "minBuildings": { "office": 2 } },
+      "effects": { "nextBarMult": 0.9 }
+    },
+    {
+      "id": "antitrust", "era": [2, 3], "title": "Antitrust probe",
+      "text": "Your market position draws a subpoena.",
+      "condition": { "minCapital": 30 },
+      "choices": [
+        { "label": "Settle ($3B)", "effects": { "capital": -3 }, "requires": { "minCapital": 3 } },
+        { "label": "Fight it in public", "effects": { "trust": -4 } }
+      ]
+    }
+  ]
+}
