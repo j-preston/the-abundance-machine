@@ -38,6 +38,7 @@ export function applyEffects(state, balance, fx) {
   if (fx.assurance) state.assurance += fx.assurance;
   if (fx.data) state.data += fx.data;
   if (fx.foresight) state.foresight = Math.max(0, state.foresight + fx.foresight);
+  if (fx.toast) state.toasts.push({ kind: 'event', title: 'BONUS', text: fx.toast });
   if (fx.researchMult) state.researchMult *= fx.researchMult;
   if (fx.rivalResearchMult) for (const r of state.rivals) r.kMult *= fx.rivalResearchMult;
   if (fx.rivalBoost) for (const r of state.rivals) r.boost += fx.rivalBoost;
