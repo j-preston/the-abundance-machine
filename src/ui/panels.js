@@ -140,11 +140,20 @@ function initAllocSlider(app) {
 function updateResourceBar(app, data) {
   const st = app.state;
   const bal = data.balance;
-  const set = (id, v) => { const el = document.getElementById(id); if (el.textContent !== v) el.textContent = v; };
+
+  const cache = els._rbCache || (els._rbCache = {});
+  const get = (id) => (cache[id] ||= document.getElementById(id));
+  const set = (id, v) => {
+    const el = get(id);
+    if (el && el.textContent !== v) el.textContent = v;
+  };
+
   set('rb-capital', `${st.capital.toFixed(1)}B`);
   set('rb-energy', `${Math.round(st.energyUsed || 0)}/${Math.round(st.energyProd || 0)} MW`);
-  document.getElementById('rb-energy-wrap').classList.toggle('warn',
-    (st.energyProd || 0) > 0 && (st.energyUsed || 0) / Math.max(1, st.energyProd) > 0.92);
+  get('rb-energy-wrap')?.classList.toggle(
+    'warn',
+    (st.energyProd || 0) > 0 && (st.energyUsed || 0) / Math.max(1, st.energyProd) > 0.92
+  );
   set('rb-chips', String(Math.floor(st.chips)));
   set('rb-pf', String(Math.round(st.pf || 0)));
   set('rb-data', String(Math.round(st.data)));
@@ -152,13 +161,15 @@ function updateResourceBar(app, data) {
   set('rb-foresight', String(st.foresight));
   set('rb-coord', String(Math.round(st.coordination)));
   set('rb-assur', `${fmt(st.assurance)}/${fmt(currentBar(st, bal))}`);
+
   const c = st.alloc.c, i = st.alloc.i;
-  const track = document.getElementById('alloc-track');
-  const segs = track.querySelectorAll('.seg');
+  const track = get('alloc-track');
+  if (!track) return;
+  const segs = cache._allocSegs || (cache._allocSegs = track.querySelectorAll('.seg'));
   segs[0].style.cssText = `left:0;width:${c * 100}%`;
   segs[1].style.cssText = `left:${c * 100}%;width:${i * 100}%`;
   segs[2].style.cssText = `left:${(c + i) * 100}%;right:0`;
-  const knobs = track.querySelectorAll('.knob');
+  const knobs = cache._allocKnobs || (cache._allocKnobs = track.querySelectorAll('.knob'));
   knobs[0].style.left = `calc(${c * 100}% - 3px)`;
   knobs[1].style.left = `calc(${(c + i) * 100}% - 3px)`;
 }
