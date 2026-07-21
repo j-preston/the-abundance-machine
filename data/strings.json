@@ -6,6 +6,9 @@
     "dailySeed": "TODAY'S SEED",
     "newRun": "NEW RUN",
     "resume": "RESUME RUN",
+    "demo": "WATCH THE DEMO",
+    "demoHint": "A scripted competent run plays itself to the good ending. You control the clock.",
+    "demoBadge": "DEMO — the machine plays itself. Speed controls only.",
     "difficulty": "DIFFICULTY",
     "difficulties": {
       "straightLines": "STRAIGHT LINES",

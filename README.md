@@ -29,6 +29,15 @@ you've proven trustworthy enough to let AI help oversee AI, at which point
 oversight finally gets its own exponential. The whole game is the vertical
 distance between two curves on one chart.
 
+## Demo mode
+
+**WATCH THE DEMO** on the start page hands the run to the scripted "balanced"
+player (the same playbook the acceptance tests verify) on a seed that ends in
+victory. It builds, throttles the compute slider, answers forecast cards,
+holds and passes review gates, signs the treaty, and crosses the Threshold —
+while you watch. Only the speed controls (pause / 1× / 2× / 4×) are active
+during the demo; it ends on the gold epilogue.
+
 ## How to play
 
 - **The Ledger** (top) is the HUD: your capability curve (red), your assurance

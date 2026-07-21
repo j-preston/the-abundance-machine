@@ -7,8 +7,11 @@ import { answerForecast } from '../src/sim/forecasts.js';
 import { chooseEvent } from '../src/sim/events.js';
 
 function autoPos(state) {
+  // Positions are cosmetic (links are visual only). The browser demo sets
+  // state.layout to fit its canvas; headless uses the default grid.
   const n = state.buildings.length;
-  return { x: 90 + (n % 12) * 82, y: 130 + Math.floor(n / 12) * 78 };
+  const L = state.layout || { x0: 90, y0: 130, dx: 82, dy: 78, cols: 12 };
+  return { x: L.x0 + (n % L.cols) * L.dx, y: L.y0 + Math.floor(n / L.cols) * L.dy };
 }
 
 function build(state, balance, type) {
@@ -181,8 +184,9 @@ export const balanced = {
   event(state, data) { chooseEvent(state, data.balance, 0); },
 };
 
-/** Calibrated-ish probability estimates from live sim state (target Brier ≈ 0.15). */
-function estimate(state, balance, card) {
+/** Calibrated-ish probability estimates from live sim state (target Brier ≈ 0.15).
+    Exported so the demo mode can show the slider moving before it commits. */
+export function estimate(state, balance, card) {
   const P = card.params;
   const m = P.months ?? 12;
   const band = (need, have) => (need <= have * 0.7 ? 0.85 : need <= have * 1.3 ? 0.5 : 0.15);

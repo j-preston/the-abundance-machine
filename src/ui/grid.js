@@ -16,7 +16,7 @@ export function initGrid(app, data) {
   canvas.addEventListener('pointerleave', () => { hover = null; });
 
   canvas.addEventListener('pointerdown', (e) => {
-    if (app.mode !== 'run') return;
+    if (app.mode !== 'run' || app.demo) return;
     const r = canvas.getBoundingClientRect();
     const x = e.clientX - r.left, y = e.clientY - r.top;
     const st = app.state;
