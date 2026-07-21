@@ -1,0 +1,64 @@
+{
+  "templates": [
+    {
+      "id": "rival_tier",
+      "text": "Will {rival} cross Tier {tier} within {months} months?",
+      "params": { "months": [6, 10] },
+      "earlyResolve": true
+    },
+    {
+      "id": "player_tier",
+      "text": "Will you reach Tier {tier} within {months} months?",
+      "params": { "months": [8, 12] },
+      "earlyResolve": true
+    },
+    {
+      "id": "grid_power",
+      "text": "Will your grid exceed {mw} MW within {months} months?",
+      "params": { "months": [10, 14] },
+      "earlyResolve": true
+    },
+    {
+      "id": "major_incident",
+      "text": "Will a major incident occur anywhere in the world in the next {months} months?",
+      "params": { "months": [12, 12] },
+      "earlyResolve": true
+    },
+    {
+      "id": "fusion_before_t6",
+      "text": "Will fusion ignite before any lab reaches Tier 6?",
+      "minTier": 3,
+      "earlyResolve": false
+    },
+    {
+      "id": "trust_above",
+      "text": "Will your Trust be above {x} in {months} months?",
+      "params": { "months": [8, 12] },
+      "earlyResolve": false
+    },
+    {
+      "id": "coordination_above",
+      "text": "Will global Coordination exceed {x} within {months} months?",
+      "params": { "months": [10, 14] },
+      "earlyResolve": true
+    },
+    {
+      "id": "chips_installed",
+      "text": "Will you have at least {n} chips installed within {months} months?",
+      "params": { "months": [8, 12] },
+      "earlyResolve": true
+    },
+    {
+      "id": "treaty_signed",
+      "text": "Will a compute treaty be signed within {months} months?",
+      "params": { "months": [12, 16] },
+      "earlyResolve": true
+    },
+    {
+      "id": "capital_above",
+      "text": "Will your capital reserves exceed ${x}B in {months} months?",
+      "params": { "months": [8, 12] },
+      "earlyResolve": false
+    }
+  ]
+}

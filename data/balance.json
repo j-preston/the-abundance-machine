@@ -1,0 +1,140 @@
+{
+  "time": {
+    "startYear": 2027,
+    "startMonthIndex": 0,
+    "totalMonths": 120,
+    "tickMonths": 0.035714285714285712,
+    "secondsPerMonthAt1x": 7
+  },
+  "start": {
+    "capital": 12,
+    "trust": 60,
+    "coordination": 18,
+    "foresight": 0,
+    "chips": 0,
+    "data": 40,
+    "capability": 12,
+    "assurance": 0,
+    "alloc": { "c": 0.7, "i": 0.05, "a": 0.25 }
+  },
+  "economy": {
+    "incomeBase": 0.38,
+    "incomePerTier": 0.5,
+    "trustIncomeFloor": 0.5,
+    "deflationPerTier": 0.88,
+    "dataDemandCoef": 0.55,
+    "dataFactorExp": 0.5,
+    "syntheticDataCoef": 0.05,
+    "syntheticDataCap": 3.0,
+    "syntheticFractionThreshold": 0.6,
+    "chipsPerPF": 2,
+    "gigawattMW": 1000
+  },
+  "research": {
+    "labCoef": 2.0,
+    "tierMult": 1.62,
+    "holdConversion": 0.3
+  },
+  "assurance": {
+    "officeRate": 6,
+    "wingCoef": 4.0
+  },
+  "buildings": {
+    "solar":    { "name": "Solar Farm",     "glyph": "○", "cost": 0.6, "build": 1, "powerOut": 100,  "draw": 0,   "radius": 42, "unlockTier": 0 },
+    "gas":      { "name": "Gas Turbine",    "glyph": "◔", "cost": 0.9, "build": 1, "powerOut": 250,  "draw": 0,   "radius": 26, "unlockTier": 0, "trustPerYear": -0.4 },
+    "fission":  { "name": "Fission Plant",  "glyph": "◉", "cost": 2.5, "build": 4, "powerOut": 600,  "draw": 0,   "radius": 30, "unlockTier": 2 },
+    "fusion":   { "name": "Fusion Plant",   "glyph": "☀", "cost": 6,   "build": 5, "powerOut": 2500, "draw": 0,   "radius": 34, "unlockTier": 5 },
+    "fab":      { "name": "Chip Fab",       "glyph": "□", "cost": 2.5, "build": 3, "chipsPerMo": 12, "draw": 60,  "radius": 26, "unlockTier": 0 },
+    "datacenter": { "name": "Datacenter",   "glyph": "⬡", "cost": 1.8, "build": 2, "chipSlots": 24,  "draw": 120, "radius": 28, "unlockTier": 0 },
+    "refinery": { "name": "Data Refinery",  "glyph": "▤", "cost": 1.2, "build": 2, "dataPerMo": 10,  "draw": 40,  "radius": 24, "unlockTier": 0 },
+    "lab":      { "name": "Frontier Lab",   "glyph": "△", "cost": 3,   "build": 3, "draw": 30,  "radius": 28, "unlockTier": 0 },
+    "office":   { "name": "Assurance Office", "glyph": "⬠", "cost": 1.5, "build": 2, "draw": 20, "radius": 24, "unlockTier": 0 },
+    "wing":     { "name": "Automated Alignment Wing", "glyph": "⬠⁺", "cost": 4, "build": 3, "draw": 50, "radius": 28, "unlockTier": 4, "gated": true },
+    "robotics": { "name": "Robotics Bay",   "glyph": "⧉", "cost": 3,   "build": 3, "draw": 80,  "radius": 28, "unlockTier": 5, "max": 3, "buildTimeMult": 0.75 },
+    "policy":   { "name": "Policy Desk",    "glyph": "✦", "cost": 0.8, "build": 1, "draw": 10,  "radius": 22, "unlockTier": 0, "max": 1 }
+  },
+  "tiers": {
+    "thresholds": [100, 300, 900, 2700, 8100, 24300, 72900],
+    "bars": [40, 100, 240, 560, 1280, 2900, 6400],
+    "names": ["Reliable Agents", "Autonomous Coding", "Novel Science", "Self-Directed Research", "Economic Takeover Speed", "Recursive Improvement", "The Threshold"],
+    "passBarSpend": 0.5,
+    "passTrust": 3,
+    "forceTrust": -8,
+    "forceMultiplier": 3,
+    "forceMonths": 12,
+    "finalCoordination": 60
+  },
+  "gap": {
+    "assuranceFloor": 0.05,
+    "gapMax": 3.0,
+    "healthyG": 0.8,
+    "incidentCoef": 0.004,
+    "cascadeG": 2.0,
+    "cascadeTier": 6,
+    "majorG": 1.5,
+    "majorTier": 4,
+    "minorTrust": -4,
+    "minorOfflineMonths": 2,
+    "minorOpenMonths": 6,
+    "majorTrust": -15,
+    "majorOpenMonths": 12,
+    "regulationMonths": 12,
+    "regulationMult": 0.8
+  },
+  "rivals": [
+    {
+      "key": "apex", "name": "Apex Dynamics",
+      "startC": 55, "kBase": 0.082, "noise": 0.22,
+      "assuranceBase": 0.5
+    },
+    {
+      "key": "prometheus", "name": "Prometheus Initiative",
+      "startC": 80, "kBase": 0.07, "noise": 0.1,
+      "assuranceBase": 0.35,
+      "opportunist": true, "opportunistMult": 1.22
+    }
+  ],
+  "rivalRules": {
+    "coordSafetyDrag": 0.15,
+    "opportunistWindow": 12,
+    "opportunistRatio": 0.5,
+    "revealIntelPF": 8
+  },
+  "coordination": {
+    "decayPerMonth": 0.3,
+    "publishCost": 0.05, "publishCoord": 12, "publishTrust": 4,
+    "evalsCostA": 150, "evalsCoord": 15,
+    "treatyTrustReq": 70, "treatyCoordReq": 50, "treatyMult": 0.85, "treatyMonths": 18, "treatyCoord": 20,
+    "diploCooldown": 12
+  },
+  "forecasts": {
+    "intervalMin": 8, "intervalMax": 10,
+    "policyDeskBonus": 3,
+    "foresightScale": 40,
+    "firstCardMonth": 2
+  },
+  "foresightSpends": {
+    "fastTrack": 6,
+    "investor": 8, "investorCapital": 3,
+    "intel": 5, "intelMonths": 12,
+    "policyWindow": 10
+  },
+  "events": {
+    "checkFrom": 6,
+    "perMonthChance": 0.13,
+    "minGapMonths": 4
+  },
+  "trust": {
+    "max": 100,
+    "recoveryPerMonth": 0.25,
+    "recoveryCeiling": 60,
+    "cleanGigawattTrust": 5,
+    "gasGigawattTrust": -3,
+    "gasHeavyFraction": 0.4
+  },
+  "difficulties": {
+    "straightLines": { "incidentMult": 0.5, "rivalMult": 0.9,  "foresightMult": 1, "toasts": true },
+    "bitterLesson":  { "incidentMult": 1.0, "rivalMult": 1.0,  "foresightMult": 1, "toasts": false },
+    "hardTakeoff":   { "incidentMult": 1.5, "rivalMult": 1.13, "foresightMult": 2, "toasts": false }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "the-abundance-machine",
+  "version": "1.0.0",
+  "description": "A factory-strategy outro game where the win condition is an aligned superintelligence.",
+  "type": "module",
+  "scripts": {
+    "simulate": "node scripts/simulate.js",
+    "sweep": "node scripts/simulate.js --sweep",
+    "test": "node scripts/test.js",
+    "serve": "python3 -m http.server 8000"
+  },
+  "license": "MIT"
+}
