@@ -3,7 +3,7 @@
 import { buildingCost } from '../state.js';
 import { canPlace } from '../sim/economy.js';
 import { currentBar, canPassReview, resolveReview, computeGap, tierFraction } from '../sim/tiers.js';
-import { diplomacyStatus, doDiplomacy, spendForesight, revealLevel } from '../sim/rivals.js';
+import { diplomacyStatus, doDiplomacy, spendForesight } from '../sim/rivals.js';
 import { answerForecast, meanBrier } from '../sim/forecasts.js';
 import { chooseEvent } from '../sim/events.js';
 import { fmt } from './ledger.js';
