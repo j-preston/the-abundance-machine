@@ -58,19 +58,19 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 function lerpColor(c1, c2, t) {
   return [lerp(c1[0], c2[0], t), lerp(c1[1], c2[1], t), lerp(c1[2], c2[2], t)];
 }
-const SKY_DAWN = [0x5C, 0x6F, 0x91], SKY_GOLD = [0xB9, 0x9C, 0x74], SKY_NOON = [0x8F, 0xC1, 0xE3];
+const SKY_DAWN = [0x5C, 0x6F, 0x91], SKY_GOLD = [0xC6, 0xB4, 0x95], SKY_NOON = [0x8F, 0xC1, 0xE3];
 function rgb(c, a = 1) { return `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`; }
 
 export function skyColor(month) {
   const p = Math.max(0, Math.min(1, month / 108));
-  return p < 0.45
-    ? lerpColor(SKY_DAWN, SKY_GOLD, p / 0.45)
-    : lerpColor(SKY_GOLD, SKY_NOON, (p - 0.45) / 0.55);
+  return p < 0.32
+    ? lerpColor(SKY_DAWN, SKY_GOLD, p / 0.32)
+    : lerpColor(SKY_GOLD, SKY_NOON, (p - 0.32) / 0.68);
 }
 
 function drawSky(ctx, w, h, st, uiTime) {
   const c = skyColor(st.t);
-  const top = lerpColor(c, [255, 255, 255], 0.3);
+  const top = lerpColor(c, [255, 255, 255], 0.42);
   const g = ctx.createLinearGradient(0, 0, 0, h);
   g.addColorStop(0, rgb(top));
   g.addColorStop(1, rgb(c));

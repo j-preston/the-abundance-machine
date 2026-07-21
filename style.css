@@ -230,7 +230,8 @@ button {
 .prob-slider { width: 100%; margin: 6px 0 2px; accent-color: var(--sun); }
 .prob-readout { font-family: var(--font-mono); font-size: 15px; text-align: center; margin-bottom: 4px; }
 
-.kv { display: flex; justify-content: space-between; font-size: 12px; padding: 1.5px 0; }
+.kv { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; padding: 1.5px 0; }
+.kv .v { text-align: right; }
 .kv .v { font-family: var(--font-mono); }
 .section-label {
   font-family: var(--font-mono);
@@ -315,7 +316,10 @@ button {
   color: var(--paper);
   text-align: center;
   padding: 24px;
+  /* Let click-to-skip reach the ending canvas; children re-enable events. */
+  pointer-events: none;
 }
+#overlay-ui > * { pointer-events: auto; }
 #overlay-ui h1 {
   font-stretch: 125%;
   font-weight: 700;

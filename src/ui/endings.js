@@ -32,7 +32,7 @@ export function drawEnding(app, data, now) {
   let e = (now - ending.t0) / 1000;
   const durations = { gold: 40, risingTide: 40, cascade: 18, silentRace: 14, pulledPlug: 12 };
   const D = durations[ending.type] ?? 14;
-  if (ending.skip) e = Math.max(e, D - 0.01);
+  if (ending.skip) e = Math.max(e, D);
 
   const canvas = document.getElementById('overlay-canvas');
   const ctx = sizeCanvas(canvas);
@@ -42,6 +42,12 @@ export function drawEnding(app, data, now) {
   else if (ending.type === 'cascade') drawCascade(ctx, w, h, e, app, data);
   else if (ending.type === 'silentRace') drawSilentRace(ctx, w, h, e, app, data);
   else drawPulledPlug(ctx, w, h, e, app, data);
+
+  // Once the card is up, dim the scene behind it (the swarm keeps turning).
+  if (ending.cardShown) {
+    ctx.fillStyle = 'rgba(16,23,38,0.8)';
+    ctx.fillRect(0, 0, w, h);
+  }
 
   if (e >= D && !ending.cardShown) {
     ending.cardShown = true;
@@ -67,9 +73,10 @@ function drawEpilogue(ctx, w, h, e, app, data) {
     }
   }
 
-  // The planet: rises from the bottom as the camera pulls away.
+  // The planet: its horizon drops into view as the camera pulls away.
   const pr = lerp(h * 3.2, h * 0.62, smooth(clamp(e / 10)));
-  const pcx = w * 0.5, pcy = h * 1.02 + pr * 0.0 + (h * 0.55) * (1 - clamp(e / 10)) + pr;
+  const top = lerp(h * 1.05, h * 0.48, smooth(clamp(e / 10)));
+  const pcx = w * 0.5, pcy = top + pr;
   ctx.strokeStyle = PAPER;
   ctx.lineWidth = 2;
   ctx.beginPath(); ctx.arc(pcx, pcy, pr, 0, Math.PI * 2); ctx.stroke();
