@@ -48,6 +48,12 @@ Sim modules are DOM-free and run unmodified under node (used by the headless
 simulator and tests). UI-only randomness must never touch `state.rngState` —
 sim determinism depends on it.
 
+Demo mode (menu → WATCH THE DEMO) replays `strategies.balanced` on
+`DEMO_SEED` in `src/main.js`, mirroring the headless driver's tick ordering so
+the trajectory is identical to `npm run simulate -- --seed=5 --strategy=balanced`.
+If balance changes, re-verify that seed still ends gold (or pick a new one)
+before shipping.
+
 ## Acceptance tests (`npm test` — keep green)
 
 - Sim determinism: same seed + same strategy ⇒ identical final state hash.

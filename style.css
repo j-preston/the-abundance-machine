@@ -369,6 +369,34 @@ button {
 .stats-roll .row { display: flex; gap: 18px; justify-content: space-between; min-width: 300px; }
 .stats-roll .row .k { opacity: 0.65; }
 
+/* ------------------------------------------------------------ demo mode -- */
+/* Only the speed controls stay interactive; everything else is display. */
+.demo-mode #build-palette,
+.demo-mode #context-panel,
+.demo-mode #resource-bar,
+.demo-mode #mute-btn,
+.demo-mode #grid-canvas { pointer-events: none; }
+.demo-mode #mute-btn { opacity: 0.3; }
+.demo-mode #grid-canvas { cursor: default; }
+.demo-mode .build-btn:hover { border-color: var(--ink-faint); }
+
+#demo-badge {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0.92;
+  z-index: 5;
+}
+
 @media (max-width: 900px) {
   #context-panel { width: 210px; }
   #build-palette { width: 74px; }
