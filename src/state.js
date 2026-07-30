@@ -69,6 +69,7 @@ export function createState(balance, seed, difficulty = 'bitterLesson') {
     forcedCount: 0,
     openIncidents: [],           // [{sev, month, closesAt}]
     incidentCount: { minor: 0, major: 0 },
+    marks: [],                   // [{m, kind}] — Ledger annotations: what happened, when
 
     buildings: [],               // [{id,type,x,y,buildTime,progress,done,powered,chips,offlineUntil}]
     nextId: 1,

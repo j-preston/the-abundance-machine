@@ -42,7 +42,11 @@ during the demo; it ends on the gold epilogue.
 
 - **The Ledger** (top) is the HUD: your capability curve (red), your assurance
   curve (teal), rivals (grey, uncertain unless you buy intel), and the shaded
-  gap between them — the danger you're managing.
+  gap between them — the danger you're managing. It reddens as the gap widens.
+  The marks along the time axis are your run's history: gold triangles for
+  gates passed, hollow red for gates forced, red dots for incidents.
+- **Hover any building** for its live status. Hovering also lights up just that
+  building's routing, so a hundred-node campus stays readable.
 - **Build** from the left palette onto the grid. Links route automatically.
 - **The C/A slider** in the bottom bar is your throttle — the most important
   control in the game.

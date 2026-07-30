@@ -153,12 +153,18 @@ function startDemo() {
   app.demoLastMonth = -1;
   app.demoDecideAt = 0;
   app.demoStaged = false;
-  // Lay the scripted build-out onto the visible canvas.
+  // Lay the scripted build-out across the whole canvas. A winning run finishes
+  // near 140 buildings, so size the grid to fit that many inside the frame —
+  // otherwise the late-game buildout walks off the bottom edge.
   const r = document.getElementById('grid-canvas').getBoundingClientRect();
-  const cols = Math.max(10, Math.floor((Math.max(600, r.width) - 130) / 62));
-  const rows = Math.max(6, Math.ceil(150 / cols));
-  const dy = Math.max(44, Math.min(78, Math.floor((Math.max(400, r.height) - 170) / rows)));
-  app.state.layout = { x0: 76, y0: 116, dx: 62, dy, cols };
+  const margin = 44;
+  const usableW = Math.max(360, r.width - margin * 2);
+  const usableH = Math.max(280, r.height - margin * 2 - 30); // 30: demo badge
+  const N = 145;
+  const cols = Math.max(8, Math.min(20, Math.round(Math.sqrt(N * (usableW / usableH)))));
+  const rows = Math.max(3, Math.ceil(N / cols));
+  const dx = usableW / cols, dy = usableH / rows;
+  app.state.layout = { x0: margin + dx / 2, y0: margin + 30 + dy / 2, dx, dy, cols };
   beginRun();
 }
 

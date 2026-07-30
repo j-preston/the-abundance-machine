@@ -7,6 +7,7 @@ import { diplomacyStatus, doDiplomacy, spendForesight, revealLevel } from '../si
 import { answerForecast, meanBrier } from '../sim/forecasts.js';
 import { chooseEvent } from '../sim/events.js';
 import { fmt } from './ledger.js';
+import { paintShape } from './grid.js';
 
 let els = {};
 let contextKey = '';
@@ -39,9 +40,12 @@ function buildPalette(app, data) {
     if (app.selectedBuild === type) btn.classList.add('selected');
     const cost = buildingCost(st, data.balance, type);
     btn.innerHTML = `
-      <span class="glyph">${def.glyph}</span>
-      <span class="bname">${def.name}</span>
-      <span class="bcost">${check.reason === 'locked' ? `T${def.unlockTier}` : `$${cost.toFixed(1)}B`}</span>`;
+      <canvas class="glyph-canvas" width="52" height="52"></canvas>
+      <span class="btext">
+        <span class="bname">${def.name}</span>
+        <span class="bcost">${check.reason === 'locked' ? `LOCKED · T${def.unlockTier}` : `$${cost.toFixed(1)}B`}</span>
+      </span>`;
+    paintIcon(btn.querySelector('.glyph-canvas'), type);
     btn.title = titleFor(type, def, check, data);
     btn.addEventListener('click', () => {
       if (locked || check.reason === 'gated') return;
@@ -51,6 +55,17 @@ function buildPalette(app, data) {
     });
     els.palette.appendChild(btn);
   }
+}
+
+/** Palette icon, painted with the very same vector code the grid uses. */
+function paintIcon(cv, type) {
+  const ctx = cv.getContext('2d');
+  const dpr = Math.min(2, devicePixelRatio || 1);
+  cv.width = 26 * dpr; cv.height = 26 * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, 26, 26);
+  ctx.translate(13, 13);
+  paintShape(ctx, type, 9, { t: 0, active: false, fill: 0.6, tilt: -0.18 });
 }
 
 function titleFor(type, def, check, data) {
@@ -74,7 +89,10 @@ function titleFor(type, def, check, data) {
 function buildResourceBar(app, data) {
   els.bar.innerHTML = `
     <span class="res"><span class="sym">$</span><span class="val" id="rb-capital"></span></span>
-    <span class="res" id="rb-energy-wrap"><span class="sym">⚡</span><span class="val" id="rb-energy"></span></span>
+    <span class="res" id="rb-energy-wrap" title="Grid load. Buildings idle newest-first when demand passes supply.">
+      <span class="sym">⚡</span><span class="val" id="rb-energy"></span>
+      <span class="gauge"><i id="rb-energy-fill"></i></span>
+    </span>
     <span class="res"><span class="sym">◧</span><span class="val" id="rb-chips"></span></span>
     <span class="res"><span class="sym">PF</span><span class="val" id="rb-pf"></span></span>
     <div id="alloc-slider" title="${data.strings.ui.alloc} — drag the knobs">
@@ -86,7 +104,10 @@ function buildResourceBar(app, data) {
       <span class="lbl" style="color:var(--assurance)">A</span>
     </div>
     <span class="res"><span class="sym">▤</span><span class="val" id="rb-data"></span></span>
-    <span class="res"><span class="sym">♥</span><span class="val" id="rb-trust"></span></span>
+    <span class="res" id="rb-trust-wrap" title="Public and governance standing. At zero, they switch off your compute.">
+      <span class="sym">♥</span><span class="val" id="rb-trust"></span>
+      <span class="gauge"><i id="rb-trust-fill"></i></span>
+    </span>
     <span class="res sun"><span class="sym">✦</span><span class="val" id="rb-foresight"></span></span>
     <span class="res"><span class="sym">⚭</span><span class="val" id="rb-coord"></span></span>
     <span class="res assur"><span class="sym">A</span><span class="val" id="rb-assur"></span></span>
@@ -143,8 +164,16 @@ function updateResourceBar(app, data) {
   const set = (id, v) => { const el = document.getElementById(id); if (el.textContent !== v) el.textContent = v; };
   set('rb-capital', `${st.capital.toFixed(1)}B`);
   set('rb-energy', `${Math.round(st.energyUsed || 0)}/${Math.round(st.energyProd || 0)} MW`);
+  const load = (st.energyUsed || 0) / Math.max(1, st.energyProd || 1);
   document.getElementById('rb-energy-wrap').classList.toggle('warn',
-    (st.energyProd || 0) > 0 && (st.energyUsed || 0) / Math.max(1, st.energyProd) > 0.92);
+    (st.energyProd || 0) > 0 && load > 0.92);
+  const eFill = document.getElementById('rb-energy-fill');
+  eFill.style.width = `${Math.min(100, load * 100)}%`;
+  eFill.style.background = load > 0.92 ? 'var(--danger)' : 'var(--sun)';
+  const tFill = document.getElementById('rb-trust-fill');
+  tFill.style.width = `${Math.max(0, Math.min(100, st.trust))}%`;
+  tFill.style.background = st.trust < 25 ? 'var(--danger)' : st.trust < 50 ? '#B8890A' : 'var(--assurance)';
+  document.getElementById('rb-trust-wrap').classList.toggle('warn', st.trust < 25);
   set('rb-chips', String(Math.floor(st.chips)));
   set('rb-pf', String(Math.round(st.pf || 0)));
   set('rb-data', String(Math.round(st.data)));
@@ -180,11 +209,25 @@ export function updatePanels(app, data, force) {
     contextKey = key;
     renderContext(app, data);
   } else {
-    // Live-update the default panel's numbers without rebuilding.
+    // Live-update the default panel's readouts without rebuilding the DOM.
+    const G = computeGap(st, data.balance);
     const g = document.getElementById('ctx-gap');
-    if (g) g.textContent = computeGap(st, data.balance).toFixed(2);
+    if (g) {
+      g.textContent = G.toFixed(2);
+      g.style.color = G > 1.5 ? 'var(--danger)' : G > 1 ? '#B8890A' : 'var(--assurance)';
+    }
+    const gf = document.getElementById('ctx-gap-fill');
+    if (gf) {
+      gf.style.width = `${Math.min(100, (G / 2.4) * 100)}%`;
+      gf.style.background = G > 1.5 ? 'var(--danger)' : G > 1 ? '#DE9B0B' : 'var(--assurance)';
+    }
+    const frac = tierFraction(st, data.balance);
     const pr = document.getElementById('ctx-progress');
-    if (pr) pr.textContent = `${Math.round(tierFraction(st, data.balance) * 100)}%`;
+    if (pr) pr.textContent = `${Math.round(frac * 100)}%`;
+    const pb = document.getElementById('ctx-progress-bar');
+    if (pb) pb.style.width = `${frac * 100}%`;
+    const ab = document.getElementById('ctx-assur-bar');
+    if (ab) ab.style.width = `${Math.min(100, (st.assurance / Math.max(1, currentBar(st, data.balance))) * 100)}%`;
   }
 }
 
@@ -303,14 +346,29 @@ function buildingCard(app, data, b) {
 function statusCard(app, data) {
   const st = app.state, bal = data.balance;
   const G = computeGap(st, bal);
+  const frac = tierFraction(st, bal);
   const tierName = st.tier === 0 ? '—' : bal.tiers.names[st.tier - 1];
   const next = st.tier < 7 ? bal.tiers.names[st.tier] : null;
+  const aFrac = Math.min(1, st.assurance / Math.max(1, currentBar(st, bal)));
   return el(`<div class="card">
     <div class="section-label">STATUS</div>
-    <div class="kv"><span>tier ${st.tier}</span><span class="v">${tierName}</span></div>
-    ${next ? `<div class="kv"><span>researching</span><span class="v">${next}</span></div>` : ''}
-    <div class="kv"><span>tier progress</span><span class="v" id="ctx-progress">${Math.round(tierFraction(st, bal) * 100)}%</span></div>
-    <div class="kv"><span>the gap G</span><span class="v" id="ctx-gap">${G.toFixed(2)}</span></div>
+    <div class="tier-head">
+      <span class="tno">T${st.tier}</span>
+      <span class="tname">${st.tier === 0 ? 'PRE-TIER' : tierName}</span>
+    </div>
+    ${next ? `<div class="tier-next">→ researching ${next}</div>` : '<div class="tier-next">→ the Threshold is behind you</div>'}
+    <div class="kv"><span>tier progress</span><span class="v" id="ctx-progress">${Math.round(frac * 100)}%</span></div>
+    <div class="track"><i id="ctx-progress-bar" style="width:${frac * 100}%;background:var(--capability)"></i></div>
+    <div class="kv"><span>assurance vs bar</span><span class="v">${Math.round(aFrac * 100)}%</span></div>
+    <div class="track"><i id="ctx-assur-bar" style="width:${aFrac * 100}%;background:var(--assurance)"></i></div>
+    <div class="gap-gauge" title="G ≈ 1 is healthy. Past 1.5 the incident rolls bite; 2.0 at Tier 6+ is the Cascade.">
+      <div class="gap-label"><span>THE GAP</span><span class="v" id="ctx-gap">${G.toFixed(2)}</span></div>
+      <div class="gap-track">
+        <i class="gap-fill" id="ctx-gap-fill" style="width:${Math.min(100, (G / 2.4) * 100)}%"></i>
+        <b class="gap-tick" style="left:${(1 / 2.4) * 100}%"></b>
+        <b class="gap-tick danger" style="left:${(2 / 2.4) * 100}%"></b>
+      </div>
+    </div>
     <div class="kv"><span>open incidents</span><span class="v">${st.openIncidents.length}</span></div>
     <div class="kv"><span>cost deflation</span><span class="v">×${st.deflation.toFixed(2)}</span></div>
     ${meanBrier(st) != null ? `<div class="kv"><span>Brier</span><span class="v">${meanBrier(st).toFixed(2)}</span></div>` : ''}

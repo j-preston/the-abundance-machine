@@ -40,18 +40,18 @@
     "wingCoef": 4.0
   },
   "buildings": {
-    "solar":    { "name": "Solar Farm",     "glyph": "○", "cost": 0.6, "build": 1, "powerOut": 100,  "draw": 0,   "radius": 42, "unlockTier": 0 },
-    "gas":      { "name": "Gas Turbine",    "glyph": "◔", "cost": 0.9, "build": 1, "powerOut": 250,  "draw": 0,   "radius": 26, "unlockTier": 0, "trustPerYear": -0.4 },
-    "fission":  { "name": "Fission Plant",  "glyph": "◉", "cost": 2.5, "build": 4, "powerOut": 600,  "draw": 0,   "radius": 30, "unlockTier": 2 },
-    "fusion":   { "name": "Fusion Plant",   "glyph": "☀", "cost": 6,   "build": 5, "powerOut": 2500, "draw": 0,   "radius": 34, "unlockTier": 5 },
-    "fab":      { "name": "Chip Fab",       "glyph": "□", "cost": 2.5, "build": 3, "chipsPerMo": 12, "draw": 60,  "radius": 26, "unlockTier": 0 },
-    "datacenter": { "name": "Datacenter",   "glyph": "⬡", "cost": 1.8, "build": 2, "chipSlots": 24,  "draw": 120, "radius": 28, "unlockTier": 0 },
-    "refinery": { "name": "Data Refinery",  "glyph": "▤", "cost": 1.2, "build": 2, "dataPerMo": 10,  "draw": 40,  "radius": 24, "unlockTier": 0 },
-    "lab":      { "name": "Frontier Lab",   "glyph": "△", "cost": 3,   "build": 3, "draw": 30,  "radius": 28, "unlockTier": 0 },
-    "office":   { "name": "Assurance Office", "glyph": "⬠", "cost": 1.5, "build": 2, "draw": 20, "radius": 24, "unlockTier": 0 },
-    "wing":     { "name": "Automated Alignment Wing", "glyph": "⬠⁺", "cost": 4, "build": 3, "draw": 50, "radius": 28, "unlockTier": 4, "gated": true },
-    "robotics": { "name": "Robotics Bay",   "glyph": "⧉", "cost": 3,   "build": 3, "draw": 80,  "radius": 28, "unlockTier": 5, "max": 3, "buildTimeMult": 0.75 },
-    "policy":   { "name": "Policy Desk",    "glyph": "✦", "cost": 0.8, "build": 1, "draw": 10,  "radius": 22, "unlockTier": 0, "max": 1 }
+    "solar":    { "name": "Solar Farm", "short": "SOLAR",     "glyph": "○", "cost": 0.6, "build": 1, "powerOut": 100,  "draw": 0,   "radius": 42, "unlockTier": 0 },
+    "gas":      { "name": "Gas Turbine", "short": "GAS",    "glyph": "◔", "cost": 0.9, "build": 1, "powerOut": 250,  "draw": 0,   "radius": 26, "unlockTier": 0, "trustPerYear": -0.4 },
+    "fission":  { "name": "Fission Plant", "short": "FISSION",  "glyph": "◉", "cost": 2.5, "build": 4, "powerOut": 600,  "draw": 0,   "radius": 30, "unlockTier": 2 },
+    "fusion":   { "name": "Fusion Plant", "short": "FUSION",   "glyph": "☀", "cost": 6,   "build": 5, "powerOut": 2500, "draw": 0,   "radius": 34, "unlockTier": 5 },
+    "fab":      { "name": "Chip Fab", "short": "FAB",       "glyph": "□", "cost": 2.5, "build": 3, "chipsPerMo": 12, "draw": 60,  "radius": 26, "unlockTier": 0 },
+    "datacenter": { "name": "Datacenter", "short": "DATACENTER",   "glyph": "⬡", "cost": 1.8, "build": 2, "chipSlots": 24,  "draw": 120, "radius": 28, "unlockTier": 0 },
+    "refinery": { "name": "Data Refinery", "short": "REFINERY",  "glyph": "▤", "cost": 1.2, "build": 2, "dataPerMo": 10,  "draw": 40,  "radius": 24, "unlockTier": 0 },
+    "lab":      { "name": "Frontier Lab", "short": "LAB",   "glyph": "△", "cost": 3,   "build": 3, "draw": 30,  "radius": 28, "unlockTier": 0 },
+    "office":   { "name": "Assurance Office", "short": "ASSURANCE", "glyph": "⬠", "cost": 1.5, "build": 2, "draw": 20, "radius": 24, "unlockTier": 0 },
+    "wing":     { "name": "Automated Alignment Wing", "short": "AA WING", "glyph": "⬠⁺", "cost": 4, "build": 3, "draw": 50, "radius": 28, "unlockTier": 4, "gated": true },
+    "robotics": { "name": "Robotics Bay", "short": "ROBOTICS",   "glyph": "⧉", "cost": 3,   "build": 3, "draw": 80,  "radius": 28, "unlockTier": 5, "max": 3, "buildTimeMult": 0.75 },
+    "policy":   { "name": "Policy Desk", "short": "POLICY",    "glyph": "✦", "cost": 0.8, "build": 1, "draw": 10,  "radius": 22, "unlockTier": 0, "max": 1 }
   },
   "tiers": {
     "thresholds": [100, 300, 900, 2700, 8100, 24300, 72900],

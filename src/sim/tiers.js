@@ -72,7 +72,7 @@ export function resolveReview(state, balance, choice) {
     if (!canPassReview(state, balance)) return false;
     state.assurance -= currentBar(state, balance) * t.passBarSpend;
     applyTrust(state, balance, t.passTrust);
-    advanceTier(state, balance);
+    advanceTier(state, balance, false);
     if (state.tier >= 7) state.ending = { type: 'gold', month: state.month };
     return true;
   }
@@ -82,15 +82,16 @@ export function resolveReview(state, balance, choice) {
     state.forceUntil = state.month + t.forceMonths;
     state.forcedCount++;
     state.toasts.push({ kind: 'warn', key: 'forced' });
-    advanceTier(state, balance);
+    advanceTier(state, balance, true);
     return true;
   }
   return false;
 }
 
-function advanceTier(state, balance) {
+function advanceTier(state, balance, forced) {
   state.tier++;
   state.tierMonths.push(state.month);
+  state.marks.push({ m: state.month, kind: forced ? 'forced' : 'tier', tier: state.tier });
   state.deflation *= balance.economy.deflationPerTier;
   state.nextBarMult = 1;
   state.review = null;
@@ -115,6 +116,7 @@ export function monthlyIncidentRoll(state, balance, G) {
     state.ending = { type: 'cascade', month: state.month };
     return;
   }
+  state.marks.push({ m: state.month, kind: 'incident' });
   if (tier >= g.majorTier && G >= g.majorG) {
     applyTrust(state, balance, g.majorTrust);
     state.regulationUntil = state.month + g.regulationMonths;
